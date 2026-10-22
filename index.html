@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简单 · 优雅卡片</title>
+    <style>
+        /* 全局重置与基础风格 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #f0f4fd 0%, #e3e9f2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            line-height: 1.5;
+            color: #1a2639;
+        }
+
+        /* 主卡片容器 —— 简单、干净、有层次 */
+        .card {
+            max-width: 650px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 2rem;
+            padding: 2.8rem 2.5rem;
+            box-shadow: 
+                0 25px 40px -15px rgba(0, 20, 40, 0.25),
+                0 10px 20px -8px rgba(0, 0, 0, 0.1),
+                inset 0 1px 2px rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(2px);
+            transition: transform 0.25s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 
+                0 35px 50px -18px rgba(0, 25, 60, 0.3),
+                0 15px 25px -10px rgba(0, 0, 0, 0.15),
+                inset 0 1px 2px rgba(255, 255, 255, 0.8);
+        }
+
+        /* 装饰性小徽章 */
+        .badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            background: #d9e2ff;
+            color: #1f3a7a;
+            padding: 0.35rem 1rem;
+            border-radius: 999px;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(31, 58, 122, 0.15);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+        }
+
+        /* 主标题 */
+        h1 {
+            font-size: clamp(2.2rem, 8vw, 3.2rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            color: #0b1a32;
+            margin-bottom: 1rem;
+            word-break: break-word;
+        }
+
+        /* 高亮装饰色 */
+        .highlight {
+            color: #2e5bff;
+            background: linear-gradient(120deg, #2e5bff20 0%, #2e5bff10 80%);
+            padding: 0 0.3rem;
+            border-radius: 0.4rem;
+            box-decoration-break: clone;
+            -webkit-box-decoration-break: clone;
+        }
+
+        /* 描述段落 */
+        .description {
+            font-size: 1.15rem;
+            color: #3e4c62;
+            margin: 1.2rem 0 2rem 0;
+            max-width: 90%;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        /* 按钮组 */
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        /* 主按钮 — 渐变、圆润、有光泽 */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background: #2e5bff;
+            background: linear-gradient(135deg, #2e5bff 0%, #1d4ed8 100%);
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.9rem 2rem;
+            border-radius: 2.5rem;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            box-shadow: 0 12px 20px -12px #1e3a8a80, 0 4px 10px -4px #1e3a8a40;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            letter-spacing: 0.01em;
+            flex: 0 1 auto;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+            background: linear-gradient(135deg, #1f4de0, #1740b0);
+            transform: scale(1.02);
+            box-shadow: 0 18px 25px -14px #1e3a8a90, 0 6px 12px -6px #1e3a8a60;
+        }
+
+        .btn-primary:active {
+            transform: scale(0.98);
+            box-shadow: 0 8px 15px -10px #1e3a8a;
+        }
+
+        /* 次级按钮 — 简约幽灵风格 */
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            background: transparent;
+            color: #1f3a7a;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 0.9rem 2rem;
+            border-radius: 2.5rem;
+            border: 1.5px solid #cbd5e1;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            flex: 0 1 auto;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+        }
+
+        .btn-secondary:hover {
+            background: #f8faff;
+            border-color: #2e5bff;
+            color: #2e5bff;
+            box-shadow: 0 8px 15px -10px rgba(46, 91, 255, 0.2);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary:active {
+            transform: translateY(0);
+            background: #eef2ff;
+        }
+
+        /* 简单的装饰线，增添细节 */
+        .footer-note {
+            margin-top: 2.2rem;
+            font-size: 0.85rem;
+            color: #8a99b0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-note::before {
+            content: "✦";
+            color: #2e5bff;
+            font-size: 1rem;
+            opacity: 0.6;
+        }
+
+        /* 移动端微调 */
+        @media (max-width: 480px) {
+            .card {
+                padding: 2rem 1.5rem;
+                border-radius: 1.5rem;
+            }
+
+            .description {
+                font-size: 1rem;
+                max-width: 100%;
+            }
+
+            .actions {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                justify-content: center;
+                padding: 0.9rem 1.2rem;
+            }
+
+            .badge {
+                font-size: 0.7rem;
+                padding: 0.3rem 0.9rem;
+            }
+        }
+
+        /* 尊重减少动画偏好 */
+        @media (prefers-reduced-motion: reduce) {
+            .card, .btn-primary, .btn-secondary {
+                transition: none;
+            }
+            .card:hover {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="card">
+        <!-- 小徽章 / 装饰标签 -->
+        <span class="badge">✨ 初见 · 简单</span>
+
+        <!-- 主标题 -->
+        <h1>
+            你好，<br>
+            <span class="highlight">世界</span> 很美。
+        </h1>
+
+        <!-- 描述段落 -->
+        <p class="description">
+            这是一个完全由 HTML 和 CSS 构建的卡片。干净的布局、柔和的阴影和用心的细节，无需一行 JavaScript。
+        </p>
+
+        <!-- 按钮区域 -->
+        <div class="actions">
+            <a href="#" class="btn-primary" role="button">
+                🌱 开始探索
+            </a>
+            <a href="#" class="btn-secondary" role="button">
+                📖 了解更多
+            </a>
+        </div>
+
+        <!-- 底部微小装饰 -->
+        <div class="footer-note">
+            <span>纯 CSS · 响应式 · 现代设计</span>
+        </div>
+    </main>
+</body>
+</html>
